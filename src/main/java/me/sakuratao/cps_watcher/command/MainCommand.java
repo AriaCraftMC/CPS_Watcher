@@ -35,6 +35,10 @@ public class MainCommand implements TabExecutor {
                 // 被观察者
                 Player player = Bukkit.getPlayer(args[0]);
 
+                if (!player.isOnline()){
+                    sender.sendMessage(watcher.getMessageManager().getPREFIX() + "§c这名玩家不在线");
+                }
+
                 if (player == playerData.getWatcher()){
                     playerData.setWatcher(null);
                     sender.sendMessage(watcher.getMessageManager().getPREFIX() + watcher.getMessageManager().getEND_WATCH().replace("%player%", player.getName()));
