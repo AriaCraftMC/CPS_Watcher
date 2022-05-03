@@ -1,0 +1,7 @@
+name: CPS_Watcher
+version: '${project.version}'
+main: me.sakuratao.cps_watcher.CPS_Watcher
+api-version: 1.18
+depend: [ ProtocolLib ]
+commands:
+  cps:

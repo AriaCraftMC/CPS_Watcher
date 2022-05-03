@@ -1,0 +1,8 @@
+# 前缀
+PREFIX: "&bCPS 监察 &8-> &r"
+
+# 可用变量 %player%
+START_WATCH: "&b开始对玩家 %player% 的 CPS 监察"
+END_WATCH: "&c结束对玩家 %player% 的 CPS 监察"
+# 可用变量 %player% 与 %cps%
+WATCHING: "&b玩家 &8- &b%player% &8- &bCPS[1秒平均值]: %cps% "
