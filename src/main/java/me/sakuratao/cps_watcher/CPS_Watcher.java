@@ -14,7 +14,7 @@ import me.sakuratao.cps_watcher.listener.PacketListener;
 import me.sakuratao.cps_watcher.listener.PlayerListener;
 import me.sakuratao.cps_watcher.message.MessageManager;
 import me.sakuratao.cps_watcher.task.RP;
-import me.sakuratao.cps_watcher.task.TA;
+import me.sakuratao.cps_watcher.task.AE;
 import me.sakuratao.cps_watcher.utils.TaskUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -49,7 +49,7 @@ public final class CPS_Watcher extends JavaPlugin {
 
         getCommand("cps").setExecutor(new MainCommand(this));
 
-        TaskUtil.taskTimerAsync(new TA(this), 0, 20);
+        TaskUtil.taskTimerAsync(new AE(this), 0, 20);
         TaskUtil.taskTimerAsync(new RP(this), 0, 21);
 
         APIProvide.setApi(new API() {
