@@ -33,11 +33,12 @@ public class MainCommand implements TabExecutor {
 
             if (args.length == 1){
                 // 被观察者
-                Player player = Bukkit.getPlayer(args[0]);
-
-                if (!player.isOnline()){
+                if (Bukkit.getPlayer(args[0]) == null){
                     sender.sendMessage(watcher.getMessageManager().getPREFIX() + "§c这名玩家不在线");
+                    return true;
                 }
+
+                Player player = Bukkit.getPlayer(args[0]);
 
                 if (player == playerData.getWatcher()){
                     playerData.setWatcher(null);

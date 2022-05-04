@@ -5,7 +5,10 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import lombok.Getter;
 import lombok.Setter;
+import me.sakuratao.cps_watcher.api.API;
+import me.sakuratao.cps_watcher.api.APIProvide;
 import me.sakuratao.cps_watcher.command.MainCommand;
+import me.sakuratao.cps_watcher.data.PlayerData;
 import me.sakuratao.cps_watcher.data.PlayerDataManager;
 import me.sakuratao.cps_watcher.listener.PacketListener;
 import me.sakuratao.cps_watcher.listener.PlayerListener;
@@ -48,6 +51,26 @@ public final class CPS_Watcher extends JavaPlugin {
 
         TaskUtil.taskTimerAsync(new TA(this), 0, 20);
         TaskUtil.taskTimerAsync(new RP(this), 0, 21);
+
+        APIProvide.setApi(new API() {
+
+
+            @Override
+            public PlayerData playerData(Player player) {
+                return getPlayerDataManager().getPlayerData(player);
+            }
+
+            @Override
+            public double total_cps(PlayerData playerData) {
+                return playerData.getTotal_cps();
+            }
+
+            @Override
+            public double average_cps(PlayerData playerData) {
+                return playerData.getAverage_cps();
+            }
+
+        });
 
         getLogger().info("Made by: SakuraTao");
 
