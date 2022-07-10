@@ -31,10 +31,9 @@ public class RP extends BukkitRunnable {
 
             PlayerData w = watcher.getPlayerDataManager().getPlayerData(p.getWatcher());
 
-            if (w.getAverage_cps() <= 0) continue;
-
-            p.getPlayer().sendMessage(watcher.getMessageManager().getPREFIX() + watcher.getMessageManager().getWATCHING().replace("%player%", w.getPlayer().getName()).replace("%cps%", w.getAverage_cps() + ""));
-            w.setAverage_cps(0);
+            p.getPlayer().sendMessage(watcher.getMessageManager().getPREFIX() + watcher.getMessageManager().getWATCHING().replace("%player%", w.getPlayer().getName()).replace("%r_cps%", w.getRight_average_cps() + "").replace("%l_cps%", w.getLeft_average_cps() + ""));
+            w.setRight_total_cps(0);
+            w.setLeft_average_cps(0);
         }
 
     }

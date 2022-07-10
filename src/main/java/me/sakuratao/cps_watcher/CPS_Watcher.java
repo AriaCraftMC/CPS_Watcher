@@ -37,7 +37,7 @@ public final class CPS_Watcher extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
 
-        packetListener = new PacketListener(this, this, PacketType.Play.Client.ARM_ANIMATION);
+        packetListener = new PacketListener(this, this, PacketType.Play.Client.USE_ENTITY, PacketType.Play.Client.BLOCK_PLACE);
         playerDataManager = new PlayerDataManager();
         watcher = this;
         messageManager.init(this);
@@ -61,13 +61,23 @@ public final class CPS_Watcher extends JavaPlugin {
             }
 
             @Override
-            public double total_cps(PlayerData playerData) {
-                return playerData.getTotal_cps();
+            public double right_total_cps(PlayerData playerData) {
+                return playerData.getRight_total_cps();
             }
 
             @Override
-            public double average_cps(PlayerData playerData) {
-                return playerData.getAverage_cps();
+            public double right_average_cps(PlayerData playerData) {
+                return playerData.getRight_average_cps();
+            }
+
+            @Override
+            public double left_total_cps(PlayerData playerData) {
+                return playerData.getLeft_total_cps();
+            }
+
+            @Override
+            public double left_average_cps(PlayerData playerData) {
+                return playerData.getLeft_average_cps();
             }
 
         });

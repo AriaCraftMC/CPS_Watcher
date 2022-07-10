@@ -16,11 +16,13 @@ public class AE extends BukkitRunnable {
     public void run() {
 
         for (PlayerData playerData : watcher.getPlayerDataManager().getAllData()){
-            if (playerData.getTotal_cps() == 0) continue;
 
-            playerData.setAverage_cps(playerData.getTotal_cps());
+            playerData.setRight_average_cps(playerData.getRight_total_cps());
+            playerData.setRight_total_cps(0);
 
-            playerData.setTotal_cps(0);
+            playerData.setLeft_average_cps(playerData.getLeft_total_cps());
+            playerData.setLeft_total_cps(0);
+
         }
     }
 

@@ -23,14 +23,17 @@ public class PacketListener extends PacketAdapter {
     @Override
     public void onPacketReceiving(PacketEvent event) {
 
-        if (event.getPacketType() != PacketType.Play.Client.ARM_ANIMATION){
-            return;
+        if (event.getPacketType() == PacketType.Play.Client.USE_ENTITY){
+
+            PlayerData playerData = watcher.getPlayerDataManager().getPlayerData(event.getPlayer());
+            playerData.setRight_total_cps(playerData.getRight_total_cps() + 1);
+
+        } else if (event.getPacketType() == PacketType.Play.Client.BLOCK_PLACE){
+
+            PlayerData playerData = watcher.getPlayerDataManager().getPlayerData(event.getPlayer());
+            playerData.setLeft_average_cps(playerData.getLeft_average_cps() + 1);
+
         }
 
-        PlayerData playerData = watcher.getPlayerDataManager().getPlayerData(event.getPlayer());
-
-        playerData.setTotal_cps(playerData.getTotal_cps() + 1);
-
     }
-
 }

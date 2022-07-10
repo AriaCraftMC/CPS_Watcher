@@ -7,8 +7,12 @@ public interface API {
 
     PlayerData playerData(Player player);
 
-    double total_cps(PlayerData playerData);
+    double right_total_cps(PlayerData playerData);
 
-    double average_cps(PlayerData playerData);
+    double right_average_cps(PlayerData playerData);
+
+    double left_total_cps(PlayerData playerData);
+
+    double left_average_cps(PlayerData playerData);
 
 }
