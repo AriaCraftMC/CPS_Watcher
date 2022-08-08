@@ -10,8 +10,9 @@ import me.sakuratao.cps_watcher.api.APIProvide;
 import me.sakuratao.cps_watcher.command.MainCommand;
 import me.sakuratao.cps_watcher.data.PlayerData;
 import me.sakuratao.cps_watcher.data.PlayerDataManager;
-import me.sakuratao.cps_watcher.listener.PacketListener;
+import me.sakuratao.cps_watcher.listener.packets.ArmAnimationListener;
 import me.sakuratao.cps_watcher.listener.PlayerListener;
+import me.sakuratao.cps_watcher.listener.packets.BlockPlaceListener;
 import me.sakuratao.cps_watcher.message.MessageManager;
 import me.sakuratao.cps_watcher.task.RP;
 import me.sakuratao.cps_watcher.task.AE;
@@ -31,18 +32,22 @@ public final class CPS_Watcher extends JavaPlugin {
 
     private static CPS_Watcher watcher;
     private ProtocolManager protocolManager;
-    private PacketListener packetListener;
+    private ArmAnimationListener armAnimationListener;
+    private BlockPlaceListener blockPlaceListener;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
 
-        packetListener = new PacketListener(this, this, PacketType.Play.Client.USE_ENTITY, PacketType.Play.Client.BLOCK_PLACE);
+        armAnimationListener = new ArmAnimationListener(this, this, PacketType.Play.Client.ARM_ANIMATION);
+        blockPlaceListener = new BlockPlaceListener(this, this, PacketType.Play.Client.BLOCK_PLACE);
+
         playerDataManager = new PlayerDataManager();
         watcher = this;
         messageManager.init(this);
         protocolManager = ProtocolLibrary.getProtocolManager();
-        protocolManager.addPacketListener(packetListener);
+        protocolManager.addPacketListener(armAnimationListener);
+        protocolManager.addPacketListener(blockPlaceListener);
 
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new PlayerListener(this), this);
@@ -92,7 +97,8 @@ public final class CPS_Watcher extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        protocolManager.removePacketListener(packetListener);
+        protocolManager.removePacketListener(armAnimationListener);
+        protocolManager.removePacketListener(blockPlaceListener);
     }
 
     public static CPS_Watcher getWatcher() {
